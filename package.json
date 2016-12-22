@@ -1,0 +1,30 @@
+{
+  "name": "webseries.xyz",
+  "version": "1.0.0",
+  "description": "An overview of the internets' best webseries, available for free",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "kyt dev",
+    "build": "kyt build",
+    "start": "kyt start",
+    "kyt:test": "kyt test",
+    "test-watch": "kyt test -- --watch",
+    "test-coverage": "kyt test -- --coverage",
+    "lint": "kyt lint",
+    "lint-style": "kyt lint-style",
+    "proto": "kyt proto",
+    "kyt:help": "kyt --help"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kyt": "^0.3.0",
+    "enzyme": "^2.4.1",
+    "html-webpack-plugin": "^2.22.0",
+    "react": "^15.3.0",
+    "react-addons-test-utils": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-router": "^2.6.1"
+  }
+}
