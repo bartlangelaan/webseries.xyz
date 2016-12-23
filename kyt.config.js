@@ -1,5 +1,6 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
   reactHotLoader: true,
@@ -13,10 +14,20 @@ module.exports = {
     babelLoader.options.presets.push('stage-1');
 
     if (options.type === 'client') {
+      config.output.publicPath = '';
       config.plugins.push(new HtmlWebpackPlugin({
         template: 'src/index.ejs'
       }));
     }
+
+    config.plugins.push(
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          postcss: [require('postcss-cssnext')],
+          context: '/',
+        },
+      })
+    );
 
     return config;
   }
