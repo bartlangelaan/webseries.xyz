@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import store from '../../store';
+import store from '../../models/store';
 import {observer} from 'mobx-react';
 import { Link } from 'react-router';
 import Breadcrumbs from '../Breadcrumbs';

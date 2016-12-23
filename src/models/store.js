@@ -1,50 +1,10 @@
-import {observable, computed} from 'mobx';
+import {observable} from 'mobx';
+import Show from './Show';
+import Season from './Season';
+import Episode from './Episode';
 
 const BASE_URL = 'https://shielded-shore-55917.herokuapp.com'
 // const BASE_URL = 'http://localhost:3000'
-
-class Show {
-  constructor({slug, title, firstYoutube}) {
-    this.slug = slug;
-    this.title = title;
-    this.firstYoutube = firstYoutube;
-  }
-
-  @computed
-  get seasons() {
-    return store.seasons.filter(season => season.show == this.slug);
-  }
-
-  getSeason(seasonSearch) {
-    return this.seasons.find(season => season.season == seasonSearch);
-  }
-}
-
-class Season {
-  constructor({show, season, firstYoutube}) {
-    this.show = show;
-    this.season = season;
-    this.firstYoutube = firstYoutube;
-  }
-
-  @computed
-  get episodes() {
-    return store.episodes.filter(season => season.show == this.show && season.season == this.season);
-  }
-
-  getEpisode(episodeSearch) {
-    return this.episodes.find(episode => episode.episode == episodeSearch);
-  }
-}
-
-class Episode {
-  constructor({show, season, episode, youtube}) {
-    this.show = show;
-    this.season = season;
-    this.episode = episode;
-    this.youtube = youtube;
-  }
-}
 
 class Store {
   @observable shows = [];

@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import store from '../../store';
+import store from '../../models/store';
 import {observer} from 'mobx-react';
 import Breadcrumbs from '../Breadcrumbs';
 import ThumbnailOverview from '../ThumbnailOverview';
