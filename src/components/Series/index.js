@@ -9,11 +9,10 @@ import Breadcrumbs from '../Breadcrumbs';
 export default class Series extends Component {
 
   componentDidMount() {
-    store.refreshShows();
+    store.refresh();
   }
 
   render() {
-
     return (
       <section>
         <Breadcrumbs />

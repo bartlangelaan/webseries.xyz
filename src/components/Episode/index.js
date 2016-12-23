@@ -11,9 +11,7 @@ import YouTube from 'react-youtube';
 export default class Episode extends Component {
 
   refresh({routeParams: {show, season}}) {
-    store.refreshShows();
-    store.refreshSeasons({show});
-    store.refreshEpisodes({show, season});
+    store.refresh({show, season});
   }
 
   componentDidMount() {
@@ -34,29 +32,18 @@ export default class Episode extends Component {
 
   findInfo() {
 
-    const show = store.shows
-        .find(show => show.slug == this.props.routeParams.show)
-      || {slug: this.props.routeParams.show};
+    const show = store.getShow(this.props.routeParams.show);
 
-    const season = store.seasons
-        .find(season => season.show == this.props.routeParams.show && season.season == this.props.routeParams.season)
-      || {show: this.props.routeParams.show, season: this.props.routeParams.season};
+    let season;
+    if(show){
+      season = show.getSeason(this.props.routeParams.season);
+    }
 
-    const episode = store.episodes
-        .find(episode =>
-          episode.show == this.props.routeParams.show &&
-          episode.season == this.props.routeParams.season &&
-          episode.episode == this.props.routeParams.episode
-        )
-      || {
-        show: this.props.routeParams.show,
-        season: this.props.routeParams.season,
-        episode: this.props.routeParams.episode
-      };
-
-    const episodesInThisShow = store.episodes.filter(episode => episode.show == show.slug);
-
-    const nextEpisode = episodesInThisShow[episodesInThisShow.indexOf(episode) + 1];
+    let episode, nextEpisode;
+    if(season){
+      episode = season.getEpisode(this.props.routeParams.episode);
+      nextEpisode = season.episodes[season.episodes.indexOf(episode) + 1]
+    }
 
     return {show, season, episode, nextEpisode};
   }
@@ -68,15 +55,15 @@ export default class Episode extends Component {
     return (
       <section>
         <Breadcrumbs show={info.show} season={info.season} episode={info.episode} />
-        <YouTube
-          videoId={info.episode.youtube}
-          opts={{
-            playerVars: {
-              autoplay: 1
-            }
-          }}
-          onEnd={this.onVideoEnd.bind(this)}
-        />
+        {info.episode ? <YouTube
+            videoId={info.episode.youtube}
+            opts={{
+              playerVars: {
+                autoplay: 1
+              }
+            }}
+            onEnd={this.onVideoEnd.bind(this)}
+          /> : <span>Loading...</span>}
       </section>
     )
   }

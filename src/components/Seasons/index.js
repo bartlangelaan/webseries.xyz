@@ -9,8 +9,7 @@ import Breadcrumbs from '../Breadcrumbs';
 export default class Seasons extends Component {
 
   refresh({routeParams: {show}}) {
-    store.refreshShows();
-    store.refreshSeasons({show})
+    store.refresh({show});
   }
 
   componentDidMount() {
@@ -23,19 +22,18 @@ export default class Seasons extends Component {
 
   render() {
 
-    const show = store.shows
-        .find(show => show.slug == this.props.routeParams.show)
-      || {slug: this.props.routeParams.show};
+    const show = store.getShow(this.props.routeParams.show);
 
     return (
       <section>
         <Breadcrumbs show={show} />
-        {store.seasons.filter(season => season.show == show.slug).map(season =>
+
+        {show ? show.seasons.map(season =>
           <Link to={`/${show.slug}/${season.season}`}>
             <img src={`https://img.youtube.com/vi/${season.firstYoutube}/hqdefault.jpg`} />
             {season.season}
           </Link>
-        )}
+        ) : <span>Loading...</span>}
       </section>
     )
   }
