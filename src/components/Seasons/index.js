@@ -4,6 +4,8 @@ import store from '../../store';
 import {observer} from 'mobx-react';
 import { Link } from 'react-router';
 import Breadcrumbs from '../Breadcrumbs';
+import ThumbnailOverview from '../ThumbnailOverview';
+import Thumbnail from '../Thumbnail';
 
 @observer
 export default class Seasons extends Component {
@@ -27,13 +29,16 @@ export default class Seasons extends Component {
     return (
       <section>
         <Breadcrumbs show={show} />
+        <ThumbnailOverview>
+          {show ? show.seasons.map(season =>
+            <Thumbnail
+              link={`/${show.slug}/${season.season}`}
+              youtube={season.firstYoutube}
+              caption={`Seizoen ${season.season}`}
+            />
+            ) : <span>Loading...</span>}
+        </ThumbnailOverview>
 
-        {show ? show.seasons.map(season =>
-          <Link to={`/${show.slug}/${season.season}`}>
-            <img src={`https://img.youtube.com/vi/${season.firstYoutube}/hqdefault.jpg`} />
-            {season.season}
-          </Link>
-        ) : <span>Loading...</span>}
       </section>
     )
   }
