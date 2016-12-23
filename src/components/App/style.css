@@ -1,0 +1,12 @@
+.header {
+  background-image: url('./YouTube-icon-full_color.png');
+  width: 300px;
+  background-size: contain;
+  background-position-y: 0;
+  background-repeat: no-repeat;
+  font-size: 30px;
+  padding-top: 225px;
+  padding-bottom: 25px;
+  text-align: center;
+  margin: 0 auto;
+}

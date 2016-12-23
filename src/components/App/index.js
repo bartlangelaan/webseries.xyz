@@ -1,12 +1,14 @@
 
 import React, { PropTypes } from 'react';
 import DevTools from 'mobx-react-devtools';
+import styles from './style.css';
 
 function App({ children }) {
   return (
     <div>
-      <DevTools />
-      MENU
+      <div className={styles.header}>
+        webseries.xyz
+      </div>
       {children}
     </div>
   );
