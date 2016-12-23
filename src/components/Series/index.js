@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import store from '../../store';
 import {observer} from 'mobx-react';
 import { Link } from 'react-router';
+import Breadcrumbs from '../Breadcrumbs';
 
 @observer
 export default class Series extends Component {
@@ -15,9 +16,7 @@ export default class Series extends Component {
 
     return (
       <section>
-        <div>
-          <Link to="/">Alle series</Link>
-        </div>
+        <Breadcrumbs />
         {store.shows.map(show =>
           <Link to={`/${show.slug}`}>
             <img src={`https://img.youtube.com/vi/${show.firstYoutube}/hqdefault.jpg`} />

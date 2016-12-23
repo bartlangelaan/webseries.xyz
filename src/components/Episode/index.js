@@ -2,8 +2,11 @@
 import React, { Component } from 'react';
 import store from '../../store';
 import {observer} from 'mobx-react';
-import { Link } from 'react-router';
+import { withRouter } from 'react-router';
+import Breadcrumbs from '../Breadcrumbs';
+import YouTube from 'react-youtube';
 
+@withRouter
 @observer
 export default class Episode extends Component {
 
@@ -21,7 +24,15 @@ export default class Episode extends Component {
     this.refresh(props);
   }
 
-  render() {
+  onVideoEnd(event) {
+    const info = this.findInfo();
+
+    if(info.nextEpisode){
+      this.props.router.push(`/${info.show.slug}/${info.season.season}/${info.nextEpisode.episode}`)
+    }
+  }
+
+  findInfo() {
 
     const show = store.shows
         .find(show => show.slug == this.props.routeParams.show)
@@ -38,17 +49,34 @@ export default class Episode extends Component {
           episode.episode == this.props.routeParams.episode
         )
       || {
-      show: this.props.routeParams.show,
+        show: this.props.routeParams.show,
         season: this.props.routeParams.season,
         episode: this.props.routeParams.episode
-    };
+      };
+
+    const episodesInThisShow = store.episodes.filter(episode => episode.show == show.slug);
+
+    const nextEpisode = episodesInThisShow[episodesInThisShow.indexOf(episode) + 1];
+
+    return {show, season, episode, nextEpisode};
+  }
+
+  render() {
+
+    const info = this.findInfo();
 
     return (
       <section>
-        <div>
-          <Link to="/">Alle series</Link> > <Link to={`/${show.slug}`}>{show.title}</Link> > <Link to={`/${show.slug}/${season.season}`}>{season.season}</Link>
-        </div>
-        {JSON.stringify(episode)}
+        <Breadcrumbs show={info.show} season={info.season} episode={info.episode} />
+        <YouTube
+          videoId={info.episode.youtube}
+          opts={{
+            playerVars: {
+              autoplay: 1
+            }
+          }}
+          onEnd={this.onVideoEnd.bind(this)}
+        />
       </section>
     )
   }

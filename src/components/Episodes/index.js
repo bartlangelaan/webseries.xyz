@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import store from '../../store';
 import {observer} from 'mobx-react';
 import { Link } from 'react-router';
+import Breadcrumbs from '../Breadcrumbs';
 
 @observer
 export default class Episodes extends Component {
@@ -33,9 +34,7 @@ export default class Episodes extends Component {
 
     return (
       <section>
-        <div>
-          <Link to="/">Alle series</Link> > <Link to={`/${show.slug}`}>{show.title}</Link> > <Link to={`/${show.slug}/${season.season}`}>{season.season}</Link>
-        </div>
+        <Breadcrumbs show={show} season={season} />
         {store.episodes
           .filter(episode => episode.show == show.slug && episode.season == season.season)
           .map(episode =>
