@@ -1,0 +1,12 @@
+.breadcrumbs {
+  margin: 0 auto 25px;
+  padding: 15px;
+  width: 90%;
+  background-color: lightgray;
+  border: grey;
+  border-radius: 10px;
+}
+
+.breadcrumbs a {
+  color: red;
+}

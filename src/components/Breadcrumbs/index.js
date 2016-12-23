@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import styles from './styles.css';
+
 
 export default function ({show, season, episode}){
 
@@ -26,7 +28,7 @@ export default function ({show, season, episode}){
     });
   }
 
-  return (<div>
+  return (<div className={styles.breadcrumbs}>
     {links.map(({to, display}, i) =>
       <span key={i}>
         <Link to={to}>{display}</Link>{i < links.length - 1 ? ` > ` : ''}
