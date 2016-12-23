@@ -5,6 +5,7 @@ import {observer} from 'mobx-react';
 import { withRouter } from 'react-router';
 import Breadcrumbs from '../Breadcrumbs';
 import YouTube from 'react-youtube';
+import styles from './styles.css';
 
 @withRouter
 @observer
@@ -63,6 +64,7 @@ export default class Episode extends Component {
               }
             }}
             onEnd={this.onVideoEnd.bind(this)}
+            className={styles.youtube}
           /> : <span>Loading...</span>}
       </section>
     )
