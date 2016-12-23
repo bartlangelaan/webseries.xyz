@@ -5,11 +5,12 @@ import {observer} from 'mobx-react';
 import { Link } from 'react-router';
 
 @observer
-export default class Seasons extends Component {
+export default class Episodes extends Component {
 
-  refresh({routeParams}) {
+  refresh({routeParams: {show, season}}) {
     store.refreshShows();
-    store.refreshSeasons({show: routeParams.series})
+    store.refreshSeasons({show});
+    store.refreshEpisodes({show, season});
   }
 
   componentDidMount() {
@@ -23,20 +24,27 @@ export default class Seasons extends Component {
   render() {
 
     const show = store.shows
-        .find(show => show.slug == this.props.routeParams.series)
-      || {slug: this.props.routeParams.series};
+        .find(show => show.slug == this.props.routeParams.show)
+      || {slug: this.props.routeParams.show};
+
+    const season = store.seasons
+        .find(season => season.season == this.props.routeParams.season)
+      || {show: this.props.routeParams.show, season: this.props.routeParams.season};
 
     return (
       <section>
         <div>
-          <Link to="/">Alle series</Link> > <Link to={`/${show.slug}`}>{show.title}</Link>
+          <Link to="/">Alle series</Link> > <Link to={`/${show.slug}`}>{show.title}</Link> > <Link to={`/${show.slug}/${season.season}`}>{season.season}</Link>
         </div>
-        {store.seasons.filter(season => season.show == show.slug).map(season =>
-          <Link to={`/${show.slug}/${season.season}`}>
-            <img src={`https://img.youtube.com/vi/${season.firstYoutube}/hqdefault.jpg`} />
-            {season.season}
-          </Link>
-        )}
+        {store.episodes
+          .filter(episode => episode.show == show.slug && episode.season == season.season)
+          .map(episode =>
+            <Link to={`/${show.slug}/${season.season}/${episode.episode}`}>
+              <img src={`https://img.youtube.com/vi/${episode.youtube}/hqdefault.jpg`} />
+              {episode.episode}
+            </Link>
+          )
+        }
       </section>
     )
   }

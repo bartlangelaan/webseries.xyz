@@ -15,6 +15,9 @@ export default class Series extends Component {
 
     return (
       <section>
+        <div>
+          <Link to="/">Alle series</Link>
+        </div>
         {store.shows.map(show =>
           <Link to={`/${show.slug}`}>
             <img src={`https://img.youtube.com/vi/${show.firstYoutube}/hqdefault.jpg`} />
