@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+- node
+
+script:
+- echo "Testing not yet enabled"
+
+before_deploy:
+- npm run build
+
+deploy:
+  skip_cleanup: true
+  provider: pages
+  github-token:
+    secure: "K2Yb6479IW5LZuxhLGwc8hX+eBkkNjMlidBmQn9joOBEYuyXTLdE74XNK/4B122serucPbb5sTNmybXguOQOTBgd678XRQEGetlQwVTKi4GRnIptsHPGs6B7XZulaJiRIsgOUJp/iM98+UOMplSifoLTd2AG3L5JsSpMJ4kKm47yGkNafx0FzuezrcL1eulc/C1zVp98Z/Tm+iJvO/+C6DtkaapM4InpnxF5CpqRBku/sRkR2rAeMqErUQjWSMAgOd/czdl+ttmFEQ0kG8RxwH6Cze3l6yPQIOw/KRKV2JafpXuDiq/yPbeax7lHt6OgRrmLs5xn+Mdo0PiwHekoj8Fy4Jjfw6iV9tLTxCPySHhtkaii7W5fkNr3OnCRZiBIXlfURGpulf4odprhhAIePoblJPOzY1bg1iac4vCjgim9QQ5knU19xGFnwkA+WHbuLSTou8On8ZO5XbtqCdqgUef4voEjCb4zinsR5qMf1UPeo3E1fJG6fUC9Z5g2atedxWTu1RWcHGsGq1yuseeqkSqex7IyoYPr1M61X59scLcIdAIamJzzRBv8AQB+ObYiCQQlZy5tof7eAtWSW7+1zIi1r51W+AE2ZrI94HbyucvW9YjGd7cftDnqvGc3446VUAON+o52JFc/uoQSilsWrzwG3AavOg+TpPJXPjHT860="
+  local-dir: build/public
