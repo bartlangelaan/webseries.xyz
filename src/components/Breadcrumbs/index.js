@@ -17,14 +17,14 @@ export default function ({show, season, episode}){
   if(season) {
     links.push({
       to: `/${show.slug}/${season.season}`,
-      display: season.season
+      display: `Seizoen ${season.season}`
     });
   }
 
   if(episode) {
     links.push({
       to: `/${show.slug}/${season.season}/${episode.episode}`,
-      display: episode.episode
+      display: `Aflevering ${episode.episode}`
     });
   }
 
