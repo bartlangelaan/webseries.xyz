@@ -40,6 +40,7 @@ export default class Episodes extends Component {
               link={`/${show.slug}/${season.season}/${episode.episode}`}
               youtube={episode.youtube}
               caption={`Aflevering ${episode.episode}`}
+              key={episode.episode}
             />
           ) : <span>Loading...</span>}
         </ThumbnailOverview>

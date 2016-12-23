@@ -35,6 +35,7 @@ export default class Seasons extends Component {
               link={`/${show.slug}/${season.season}`}
               youtube={season.firstYoutube}
               caption={`Seizoen ${season.season}`}
+              key={season.season}
             />
             ) : <span>Loading...</span>}
         </ThumbnailOverview>
