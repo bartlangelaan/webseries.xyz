@@ -23,13 +23,15 @@ Het project is verdeeld in `components` (views), `routes` en `models`. Dit zijn 
 **Het programma werkt in 3 browsers (IE, Chrome en Firefox). De testresultaten zijn daarvan aanwezig.**
 
 
-Niet aanwezig.
+- Internet Explorer: https://www.youtube.com/watch?v=9UbiCVbYrDA
+- Chrome: https://www.youtube.com/watch?v=ai9P9R0f9QQ
+- Firefox: https://www.youtube.com/watch?v=RXgwjBOtnw0
 
 
 **De code is voorzien van goed en zinvol commentaar volgens de JSDocs specificatie.**
 
 
-Niet aanwezig.
+Omdat het om een React project gaat, is niet zinvol om bij elke `render` of andere React-only functie een comment te zetten. Wel zitten er comments in de code als er gedeeltes mogelijk onduidelijk zijn.
 
 
 **Models (M) zijn op een goede manier gekozen en opgezet._**
